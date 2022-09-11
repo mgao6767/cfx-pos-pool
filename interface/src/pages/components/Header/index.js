@@ -1,30 +1,30 @@
-import {createPortal} from 'react-dom'
-import {Link} from 'react-router-dom'
-import {Layout, Button, Select} from 'antd'
-import {useTranslation} from 'react-i18next'
-import {useTryActivate, useAccount} from '../../../hooks/useWallet';
-import {isTestNetEnv} from '../../../utils'
+import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
+import { Layout, Button, Select } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { useTryActivate, useAccount } from '../../../hooks/useWallet';
+import { isTestNetEnv } from '../../../utils'
 import NotAllow from '../../../images/not-allow.png'
 import i18n from '../../../../public/locales'
 import useCurrentSpace from '../../../hooks/useCurrentSpace'
 import useCurrentNetwork from '../../../hooks/useCurrentNetwork'
 import useIsNetworkMatch from '../../../hooks/useIsNetworkMatch'
 
-const {Option} = Select
-const {Header} = Layout
+const { Option } = Select
+const { Header } = Layout
 const isTest = isTestNetEnv()
 
 function HeaderComp() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const address = useAccount()
   const tryActivate = useTryActivate()
   const isNetworkMatch = useIsNetworkMatch()
   const networkError = !isNetworkMatch
   const currentSpace = useCurrentSpace()
   const currentNetwork = useCurrentNetwork()
-  
+
   return (
-    <Header style={{width: '100%', height: 'fit-content', padding: 0}}>
+    <Header style={{ width: '100%', height: 'fit-content', padding: 0 }}>
       {isTest && (
         <div className="w-full h-[64px] leading-[64px] text-[#f3504f] bg-[#f3504f] bg-opacity-20 z-[49] text-[16px] text-center border-b border-[#f3504f]">
           {t('Header.test_note')}
@@ -40,15 +40,15 @@ function HeaderComp() {
         </div>
         <div className="flex items-center">
           <Select
-            style={{marginRight: '20px'}}
+            style={{ marginRight: '20px' }}
             defaultValue={i18n.language}
             onChange={lng => i18n.changeLanguage(lng)}
           >
             <Option value="en">English</Option>
+            <Option value="zh">中文</Option>
             <Option value="vn">Vietnamese</Option>
             <Option value="id">Indonesian</Option>
             <Option value="ko">Korean</Option>
-            {/* <Option value="zh">中文</Option> */}
           </Select>
           {currentSpace && address && <div>{address}</div>}
           {currentSpace && !address && (
@@ -72,7 +72,7 @@ function HeaderComp() {
                 {t('Header.error')}
               </p>
               <p className="text-[16px] leading-[24px] text-[#999] my-0 font-medium">
-                {t('Header.unspport_network_switch', { network: currentNetwork?.name || ''})}
+                {t('Header.unspport_network_switch', { network: currentNetwork?.name || '' })}
               </p>
             </div>
           </div>,
