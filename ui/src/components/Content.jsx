@@ -481,7 +481,7 @@ function Content() {
   }
 
   return (
-    <div className="container mx-auto w-full h-[90vh] space-x-4 items-center justify-center grid grid-cols-2 xl:grid-cols-3">
+    <div className="container mx-auto w-full flex-grow space-x-4 items-center justify-center grid grid-cols-2 xl:grid-cols-3">
       {/* left section */}
       <div className=" items-center justify-center flex flex-col col-span-2 h-full   py-2 px-3 w-full space-y-4">
         {/* upper section */}
