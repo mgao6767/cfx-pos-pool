@@ -1,23 +1,23 @@
-import { useMemo } from 'react';
-import useController from './useController';
-import { abi as posPoolAbi } from "./../../../contract/ABI/IPoSPool.json";
-import { useParams } from "react-router-dom";
-import { utils } from 'ethers';
+import {useMemo} from 'react'
+import useController from './useController'
+import IPoSPool from './../../../contract/ABI/IPoSPool.json'
+import {utils} from 'ethers'
+import {POOL_ADDRESS} from '../constants'
 
 const usePoolContract = () => {
-    const { poolAddress } = useParams();
-    const controller = useController();
+  const poolAddress = POOL_ADDRESS
+  const posPoolAbi = IPoSPool.abi
+  const controller = useController()
 
-    return useMemo(() => {
-        return {
-            contract: controller.Contract({
-                abi: posPoolAbi,
-                address: poolAddress,
-            }),
-            interface: new utils.Interface(posPoolAbi)
-        }
+  return useMemo(() => {
+    return {
+      contract: controller.Contract({
+        abi: posPoolAbi,
+        address: poolAddress,
+      }),
+      interface: new utils.Interface(posPoolAbi),
     }
-    , [poolAddress, controller]);
+  }, [poolAddress, controller])
 }
 
-export default usePoolContract;
+export default usePoolContract

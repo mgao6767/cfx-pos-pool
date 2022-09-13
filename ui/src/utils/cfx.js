@@ -3,8 +3,10 @@ import {
   Drip,
   Conflux,
 } from 'js-conflux-sdk/dist/js-conflux-sdk.umd.min.js'
-import {abi as posPoolAbi} from './../../../contract/ABI/IPoSPool.json'
-import {abi as posManagerAbi} from './../../../contract/ABI/PoolManager.json'
+import IPoSPool from './../../../contract/ABI/IPoSPool.json'
+const posPoolAbi = IPoSPool.abi
+import PoolManager from './../../../contract/ABI/PoolManager.json'
+const posManagerAbi = PoolManager.abi
 import poolConfig from '../../pool.config'
 import {isTestNetEnv} from './index'
 import {NETWORK_ID_CORE_MAINNET, NETWORK_ID_CORE_TESTNET} from '../constants'
@@ -29,7 +31,7 @@ export const getPosAccountByPowAddress = async address => {
   const posPoolContract = conflux.Contract({
     abi: posPoolAbi,
     address: address,
-  });
+  })
 
   const posAddress = format.hex(await posPoolContract.posAddress())
   const posAccout = await conflux.provider.call('pos_getAccount', posAddress)

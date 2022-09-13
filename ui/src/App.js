@@ -1,6 +1,7 @@
 import './App.css'
 import Header from './components/Header'
 import Content from './components/Content'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <div className="flex items-start space-x-2 justify-start w-full ">
         <Content />
       </div>
+      <Footer />
     </div>
   )
 }

@@ -7,7 +7,9 @@
     "@cfxjs/use-wallet": "^0.0.29",
     "@craco/craco": "^6.4.5",
     "bignumber.js": "^9.1.0",
+    "decimal.js": "^10.4.0",
     "ethers": "^5.7.0",
+    "gh-pages": "^4.0.0",
     "i18next": "^21.9.1",
     "js-conflux-sdk": "^2.1.6",
     "react": "^18.2.0",
@@ -22,7 +24,9 @@
     "start": "cross-env TAILWIND_MODE=watch REACT_APP_TestNet=true craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
