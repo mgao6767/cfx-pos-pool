@@ -54,7 +54,8 @@
     "withdrawable": "可提取收益:",
     "withdraw": "提取",
     "unstake_activity": "提取活动",
-    "can_withdraw_at": "可在 {{time}} 提取收益"
+    "can_withdraw_at": "可在 {{time}} 提取收益",
+    "rewards_history": "收益历史 (CFX)"
   },
   "TxModal": {
     "transaction_submitted": "交易已提交.",
