@@ -95,6 +95,8 @@ function Content() {
         )
         setApy(getApy(data?.[1]?._hex || data[1]))
         setName(data[2] || 'UnNamed')
+
+        loadRewardChartData()
       } catch (error) {}
     }
     fetchData()
@@ -480,6 +482,79 @@ function Content() {
     if (typeof callback === 'function') callback()
   }
 
+  const loadRewardChartData = () => {
+    // let posAddress = this.poolInfo.posAddress
+    // const url = `${CURRENT.scanURL}/stat/list-pos-account-reward?identifier=${posAddress}&limit=20&orderBy=createdAt&reverse=true`
+    const url =
+      'https://confluxscan.io/stat/list-pos-account-reward?identifier=0x98226b2444fa02f11da144f3c45e6a7f258bb6ab8e197f8c80ae2be94d4563c0&limit=20&orderBy=createdAt&reverse=true'
+    fetch(url)
+      .then(response => response.json())
+      .then(initLineChart)
+  }
+
+  function initLineChart(res) {
+    const paddingZero = value => (value < 10 ? `0${value}` : value)
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
+    const formatTime = date =>
+      `${months[date.getMonth()]}-${date.getDate()} ${paddingZero(
+        date.getHours(),
+      )}:${paddingZero(date.getMinutes())}`
+    const rewards = res.data
+    const {list} = rewards
+    if (list.length === 0) return
+    const labels = list.map(item => formatTime(new Date(item.createdAt)))
+    const items = list.map(item => {
+      const formated = `${item.reward / 1e18} CFX`
+      const onlyValue = formated.split(' ')[0]
+      return Number(onlyValue)
+    })
+
+    const data = {
+      labels: labels.reverse(),
+      datasets: [
+        {
+          label: 'CFX',
+          backgroundColor: '#000000',
+          borderColor: '#000000',
+          data: items.reverse(),
+        },
+      ],
+    }
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+      },
+    }
+
+    document.getElementById('rewardChartContainer').removeAttribute('style')
+    const chartEle = document.getElementById('rewardChart')
+    let chartStatus = Chart.getChart('rewardChart')
+    if (chartStatus != undefined) {
+      chartStatus.destroy()
+    }
+    const rewardChart = new Chart(chartEle, config)
+    return rewardChart
+  }
+
   return (
     <div className="container mx-auto w-full flex-grow space-x-4 items-center justify-center grid grid-cols-2 xl:grid-cols-3">
       {/* left section */}
@@ -519,8 +594,8 @@ function Content() {
             <div className="xl:col-span-1 col-span-2 px-3 py-2 bg-[#F8F8F8] rounded-lg flex items-center w-full justify-between">
               <div className="flex flex-col items-center justify-center w-full px-4 py-2">
                 <div className="text-start items-start justify-start flex w-full font-bold text-black text-xl">
-                  {' '}{t('Home.status')}
                   {' '}
+                  {t('Home.status')}{' '}
                 </div>
                 <div className="flex w-full items-center justify-between space-x-4">
                   {/* <p>Uptime: n days</p> */}
@@ -555,14 +630,12 @@ function Content() {
                 </div>
               </div>
               <div className="w-full items-start justify-start xl:items-center xl:justify-center flex flex-col">
-                <div className="font-medium text-gray-500"> 
-                  {t('Home.apy')}
-                </div>
+                <div className="font-medium text-gray-500">{t('Home.apy')}</div>
                 <div className="text-2xl font-bold"> {apy + '%'} </div>
               </div>
               <div className="w-full items-start justify-start xl:items-center xl:justify-center flex flex-col">
-                <div className="font-medium text-gray-500"> 
-                {t('Home.performance_fee')}
+                <div className="font-medium text-gray-500">
+                  {t('Home.performance_fee')}
                 </div>
                 <div className="text-2xl font-bold"> {fee + '%'} </div>
               </div>
@@ -625,14 +698,25 @@ function Content() {
           </div>
         </div>
         {/* lower section */}
-        <div className=" py-1 px-3 w-full h-full">{/* <Statistics /> */}</div>
+        <div className=" py-6 px-6 w-full h-full">
+          <div className="shadow-md rounded-md overflow-hidden">
+            <div
+              id="rewardChartContainer"
+              className="py-3 px-5 bg-gray-100 text-gray-900 font-bold"
+            >
+              {t('Pool.rewards_history')}
+            </div>
+            <canvas id="rewardChart" className="p-10"></canvas>
+          </div>
+        </div>
       </div>
       {/* right section  */}
       <div className=" col-span-1 h-full xl:flex xl:flex-col hidden space-y-6 py-6 px-6 w-full">
         {/* <Stake /> */}
         <div className="w-full flex flex-col items-center justify-center px-2 py-2">
           <div className="text-md w-full py-6">
-            <b className="text-4xl">{t(`Pool.stake`)}</b>&nbsp; {t('Pool.stake_suffix')}
+            <b className="text-4xl">{t(`Pool.stake`)}</b>&nbsp;{' '}
+            {t('Pool.stake_suffix')}
           </div>
           <div className="grid grid-cols-3 gap-4 w-full ">
             <div className="col-span-3 border-b border-black space-x-4 flex items-center justify-start w-full py-3 px-3 ">
@@ -690,7 +774,8 @@ function Content() {
         {/* <Unstake /> */}
         <div className="w-full flex flex-col items-center justify-center px-2 py-2">
           <div className="text-md w-full py-6">
-            <b className="text-4xl">{t(`Pool.unstake`)}</b>&nbsp; {t('Pool.unstake_suffix')}
+            <b className="text-4xl">{t(`Pool.unstake`)}</b>&nbsp;{' '}
+            {t('Pool.unstake_suffix')}
           </div>
           <div className="grid grid-cols-3 gap-4 w-full ">
             <div className="col-span-3 border-b border-black space-x-4 flex items-center justify-start w-full py-3 px-3 ">
@@ -746,7 +831,6 @@ function Content() {
           </div>
         </div>
       </div>
-      
     </div>
   )
 }

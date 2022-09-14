@@ -54,7 +54,8 @@
     "withdrawable": "Withdrawable:",
     "withdraw": "Withdraw",
     "unstake_activity": "Unstake Activity",
-    "can_withdraw_at": "You can withdraw at {{time}}"
+    "can_withdraw_at": "You can withdraw at {{time}}",
+    "rewards_history": "Rewards History (CFX)"
   },
   "TxModal": {
     "transaction_submitted": "Transaction Submitted.",
