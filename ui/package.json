@@ -6,6 +6,7 @@
   "dependencies": {
     "@cfxjs/use-wallet": "^0.0.29",
     "@craco/craco": "^6.4.5",
+    "@headlessui/react": "^1.7.1",
     "bignumber.js": "^9.1.0",
     "decimal.js": "^10.4.0",
     "ethers": "^5.7.0",

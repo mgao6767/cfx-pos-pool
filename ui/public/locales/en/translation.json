@@ -12,25 +12,25 @@
   "Home": {
     "status": "Status",
     "pool": "Pool Name",
-    "total_locked": "Total Locked (CFX)",
+    "total_locked": "Total Locked",
     "apy": "Est. APY",
     "performance_fee": "Performance Fee",
-    "total_revenue": "Total Revenue (CFX)",
+    "total_revenue": "Total Revenue",
     "status_good": "Good",
     "status_error": "Error",
     "status_warning": "Setup",
     "status_loading": "Loading"
   },
   "ConfirmModal": {
-    "stake": "stake",
-    "stake_1": "Unstake need 7 + 7 days",
-    "stake_2": "According to Conflux PoS mechanism.",
-    "stake_3": "When you staked your CFX, those CFX can unstake after 7 days.",
-    "stake_4": "After submitting the Unstake transaction, you need to wait a 7-day lock-up to claim your CFX.",
-    "unstake": "unstake",
+    "stake": "Stake",
+    "stake_1": "Unstake needs 7 + 7 days from now",
+    "stake_2": "According to Conflux PoS mechanism,",
+    "stake_3": "You can unstake your CFX after 7 days since staking.",
+    "stake_4": "After submitting the Unstake transaction, you need to wait another 7 days to claim your CFX.",
+    "unstake": "Unstake",
     "unstake_1": "You need to wait a 7-day lock-up to claim your CFX.",
-    "unstake_2": "No profit during 7-day lock-up.",
-    "unstake_3": "The proformance fee will be charged."
+    "unstake_2": "No rewards during 7-day lock-up.",
+    "unstake_3": "The performance fee will be charged."
   },
   "Pool": {
     "stake&unstake": "Stake & Unstake",
@@ -42,7 +42,7 @@
     "stake": "Stake",
     "stake_suffix": "to earn PoS rewards",
     "how_much_unstake": "How much do you want to unstake?(Multiples of 1,000 CFX)",
-    "unstakeable": "Unstakeable:",
+    "unstakeable": "Available:",
     "unstake": "UnStake",
     "unstake_suffix": "to stop PoS rewards",
     "my_pool": "My Pool",
@@ -60,5 +60,10 @@
   "TxModal": {
     "transaction_submitted": "Transaction Submitted.",
     "transaction_hash": "Transaction Hash:"
+  },
+  "CreditsModal": {
+    "line0": "I thank...",
+    "line1": "for the smart contract code and initial UI.",
+    "line2": "for the rewards history code."
   }
 }

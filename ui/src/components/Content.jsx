@@ -29,6 +29,9 @@ import {CFX_BASE_PER_VOTE, StatusPosNode} from '../constants'
 import useCurrentNetwork from '../hooks/useCurrentNetwork'
 import useIsNetworkMatch from '../hooks/useIsNetworkMatch'
 import {POOL_ADDRESS} from '../constants'
+import ConfirmModal from './ConfirmModal'
+import TxModal from './TxModal'
+
 
 function Content() {
   const {t} = useTranslation()
@@ -761,7 +764,7 @@ function Content() {
               >
                 <button
                   onClick={() => {
-                    checkNetwork(() => submit('stake'))
+                    checkNetwork(() => setStakeModalShown(true))
                   }}
                   disabled={isLoading || stakeBtnDisabled}
                 >
@@ -820,7 +823,7 @@ function Content() {
               >
                 <button
                   onClick={() => {
-                    checkNetwork(() => submit('unstake'))
+                    checkNetwork(() => setUnStakeModalShown(true))
                   }}
                   disabled={isLoading || unstakeBtnDisabled}
                 >
@@ -831,6 +834,28 @@ function Content() {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        visible={stakeModalShown}
+        setVisible={setStakeModalShown}
+        type="stake"
+        onOk={() => {
+          submit('stake')
+        }}
+      ></ConfirmModal>
+      <ConfirmModal
+        visible={unstakeModalShown}
+        setVisible={setUnStakeModalShown}
+        type="unstake"
+        onOk={() => {
+          submit('unstake')
+        }}
+      ></ConfirmModal>
+      <TxModal
+        visible={txModalShown}
+        setVisible={setTxModalShown}
+        txHash={txHash}
+      ></TxModal>
+      
     </div>
   )
 }

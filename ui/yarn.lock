@@ -2156,6 +2156,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/react@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "@headlessui/react@npm:1.7.1"
+  peerDependencies:
+    react: ^16 || ^17 || ^18
+    react-dom: ^16 || ^17 || ^18
+  checksum: cb553e1c772cbb83088694c812b5a81a7107a0cb3fca097a15146e8a1fd6b369ae628df32a2d009f2d7c2943d32c88a99d0d2bbbfbd075ce8651a32e3d035960
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.10.4":
   version: 0.10.4
   resolution: "@humanwhocodes/config-array@npm:0.10.4"
@@ -13121,6 +13131,7 @@ __metadata:
   dependencies:
     "@cfxjs/use-wallet": ^0.0.29
     "@craco/craco": ^6.4.5
+    "@headlessui/react": ^1.7.1
     autoprefixer: ^10.4.9
     bignumber.js: ^9.1.0
     cross-env: ^7.0.3
