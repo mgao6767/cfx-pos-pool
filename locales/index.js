@@ -6,7 +6,7 @@ import config from '../../pool.config'
 
 i18n.use(initReactI18next).init({
   lng: config.defaultLang || 'en',
-  debug: true,
+  debug: false,
   resources: {
     en: {
       translation: en,
