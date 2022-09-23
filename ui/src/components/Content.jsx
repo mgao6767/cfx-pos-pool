@@ -709,7 +709,7 @@ function Content() {
             >
               {t('Pool.rewards_history')}
             </div>
-            <canvas id="rewardChart" className="p-10"></canvas>
+            <canvas id="rewardChart" className="lg:p-10 p-2"></canvas>
           </div>
         </div>
       </div>
